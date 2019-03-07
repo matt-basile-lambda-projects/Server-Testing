@@ -14,9 +14,16 @@ server.get('/users', (req, res) => {
       })
       .catch(err => res.send(err));
   });
-  
+
 server.post('/users', (req, res) => {
-    
+    let user =req.body
+    Users.add(user)
+    .then( user => {
+        res.status(201).json(user)
+    })
+    .catch(error =>{
+        res.status(500).json(error)
+    })
 });
 server.delete('/users', (req, res) => {
     

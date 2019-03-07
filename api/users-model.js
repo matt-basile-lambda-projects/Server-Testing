@@ -21,16 +21,8 @@ async function add(user) {
   return findById(id);
 }
 async function remove(id) {
-    try {
-        const count = await db('users').where({id}).del();
-        if(count> 0){
-          return count
-        } else{
-          res.status(404).json({message: "student not found"})
-        }
-      } catch (error) {
-        res.status(500).json(error);
-      }
+    const count = await db('users').where({id}).del();
+    return count    
 }
 
 function findById(id) {

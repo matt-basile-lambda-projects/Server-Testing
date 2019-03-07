@@ -25,8 +25,14 @@ server.post('/users', (req, res) => {
         res.status(500).json(error)
     })
 });
-server.delete('/users', (req, res) => {
-    
+server.delete('/users/:id', async (req, res) => {
+   const count = await Users.remove(req.params.id)
+    try{
+        count>0 ? res.status(204).end() :  res.status(404).json({message: "student not found"})
+    } 
+    catch(err){
+        res.status(500).json(error)
+    } 
 });
 
 
